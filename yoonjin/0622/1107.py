@@ -36,3 +36,27 @@ count = count + abs(target_num - n)
 print(count)
 
 ## 2차
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+m = int(input())
+wrong = list(map(int, input().split()))
+
+# + - 만 사용해서 이동하는 경우
+count = abs(100 - n)
+
+# 리모컨으로 입력할 수 있는 모든 숫자
+for nums in range(1000001):
+    nums = str(nums)
+
+    # 한개의 숫자 당 한자리씩
+    for j in range(len(nums)):
+        # 고장났으면 입력이 안되니까 break
+        if int(nums[j]) in wrong:
+            break
+        # 안 고장났으면 타겟 숫자와의 차이 만큼이 최솟값
+        elif j == len(nums) - 1:
+            count = min(count, abs(int(nums) - n) + len(nums))
+
+print(count)
